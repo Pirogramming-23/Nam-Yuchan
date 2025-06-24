@@ -78,6 +78,7 @@
         }
         #wrap {
             text-align: center;
+            position: relative;
         }
         #wrap-center {
             width: 1280px;
@@ -86,18 +87,33 @@
         }
         #header {
             text-align: left;
+            position: relative;
         }
         #header-hamburger {
-            margin-top: 18px;
+            position: absolute;
+            top: 18px;
+            left: -10px;
             padding: 10px;
             display: inline-block;
             background: none;
             border: none;
             cursor: pointer;
         }
-        #header-hamburger:hover {
+        #header-hamburger:hover::before {
+            position: absolute;
+            content: '';
+            left: -4px;
+            top: -4px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             background-color: #e7eced;
+            padding: 9px;
+        }
+        #header-hamburger > div {
+            position: relative;
+            left: 1px;
+            top: 1px;
         }
         #header-hamburger > div {
             background-image: url(./sp_main.png);
