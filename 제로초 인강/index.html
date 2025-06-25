@@ -702,12 +702,12 @@
                     width: 1px;
                     height: 12px;
                 }
-                #main-newstand-animation a:first-of-type {
+                #main-newstand-animation > a:first-of-type {
                     position: relative;
                     top: -1px;
                     line-height: 26px;
                 }
-                #main-newstand-animation a:first-of-type::after{
+                #main-newstand-animation > a:first-of-type::after{
                     content: '';
                     display: inline-block;
                     width: 3px;
@@ -718,10 +718,48 @@
                     border-radius: 50%;
                     vertical-align: 5px;
                 }
-                #main-newstand-animation a:last-of-type {
-                    text-overflow: ellipsis;
+                @keyframes newsAnimation {
+                    0% {
+                        transform: translateY(0);
+                    }
+                    16.66666% {
+                        transform: translateY(0);
+                    }
+                    33.33333% {
+                        transform: translateY(-26px);
+                    }
+                    50% {
+                        transform: translateY(-26px);
+                    }
+                    66.66666% {
+                        transform: translateY(-52px);
+                    }
+                    83.33333% {
+                        transform: translateY(-52px);
+                    }
+                    91.66666% {
+                        transform: translateY(-65px);
+                    }
+                    91.66667% {
+                        transform: translateY(13px);
+                    }
+                    100% {
+                        transform: translateY(0);
+                    }
+                }
+                #main-newstand-animation-target {
                     width: 400px;
+                    display: inline-block;
+                    overflow: hidden;
+                }
+                #main-newstand-animation-target > div {
+                    animation: newsAnimation 5s infinite;
+
+                }
+                #main-newstand-animation-target a {
+                    text-overflow: ellipsis;
                     white-space: nowrap;
+                    width: 400px;
                     display: inline-block;
                     overflow: hidden;
                 }
@@ -882,17 +920,60 @@
                 }
                 #main-shopping-gray {
                     display: flex;
+                    justify-content: flex-start;
+                    height: 50px;
+                    padding: 12px 20px;
+                    background-color: var(--color_option_bg);
+                    border-radius: 4px;
+                    font-size: 1.2rem;
+                    line-height: 26px;
                 }
                 #main-shopping-gray .left {
-                    width: 668px;
-                    height: 50px;
+                    width: 650px;
+                    height: 30px;
                     padding: 15px, 20px, 14px;
                     display: flex;
-                    background: var(--color_option_bg);
+                }
+                #main-shopping-gray .left > a {
+                    font-size: 1.4rem;
+                    font-weight: 700;
+                    padding-right: 4px;
+                }
+                #main-shopping-gray .left > a:first-of-type::after{
+                    content: '';
+                    display: inline-block;
+                    width: 3px;
+                    height: 3px;
+                    background-color: #d3d5d7;
+                    background-color: var(--color_dot_divider);
+                    margin: 12px 6px 0 6px;
+                    border-radius: 50%;
+                    vertical-align: 5px;
+                }
+                #main-shopping-gray .left i {
+                    background-image: url(./piro.png);
+                    background-repeat: no-repeat;
+                    background-size: 100% 100%;
+                    width: 20px;
+                    height: 20px;
+                    display: inline-block;
+                    margin: 3px 8px 0 0;
+                    vertical-align: -1px;
+                }
+                #main-shopping-gray .promotion {
+                    display: flex;
+                }
+                #main-shopping-gray .promotion > a {
+                    align-items: center;
                 }
                 #main-shopping-gray .right {
-                    margin-left: auto;
                     padding: 10px 0;
+                    display: flex;
+                    align-items: center;
+                }
+                #main-shopping-gray .right > button {
+                    width: 30px;
+                    height: 30px;
                 }
                 #main-shopping-grid {
                     margin-top: 18px;
@@ -950,7 +1031,13 @@
                                     <a href="#">전체언론사</a>
                                     <div id="main-newstand-animation">
                                         <a href="#">연합뉴스</a>
-                                        <a href="#">후우꾸꾸우후오오후우꾸꾸우후오오후우꾸꾸우후오후우꾸꾸우후오오후우꾸꾸우후오오후우꾸꾸우후오</a>
+                                        <div id="main-newstand-animation-target">
+                                            <div>
+                                                <a href="#">피로그래밍 과제 아직 한개 더 남았다고 알려져 경악. 이대로 괜찮은 것인가</a>
+                                                <a href="#">세션에 참여했던 남모씨, 오늘 오전 자택에서 뜬눈으로 숨쉰채 발견..</a>
+                                                <a href="#">오래 앉아있으니 허리, 엉덩이, 목, 눈 아프다? 학계를 뒤집은 연구결과</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="right">
@@ -1004,8 +1091,8 @@
                             <div id="main-shopping-gray">
                                 <div class="left">
                                     <a href="#">오늘의 혜택</a>
-                                    <div>
-                                        <a href="#">후우꾸꾸우후오오후우꾸꾸우후오오후우꾸꾸우후오후우꾸꾸우후오오후우꾸꾸우후오오후우꾸꾸우후오</a>
+                                    <div class="promotion">
+                                        <i></i><a href="#">하루만에 바로받네~ 오늘 주문 내일 도착! 피로그래밍 슈팅배송</a>
                                     </div>
                                 </div>
                                 <div class="right">
