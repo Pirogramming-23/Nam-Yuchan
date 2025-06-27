@@ -1,0 +1,357 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    color: white;
+    font-family: sans-serif;
+}
+
+header {
+    width: 1120px;
+    height: 9rem;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    padding: 0;
+    z-index: 100;
+    background: linear-gradient(to bottom, black 50%, transparent 100%);
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+}
+
+nav {
+    width: 1120px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    margin: 0 auto;
+}
+nav img:hover {
+    cursor: pointer;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 0;
+    font-weight: bold;
+    transition: transform 0.3s ease-in-out;
+}
+nav a:hover {
+    transform: translateY(-2px);
+}
+.nav-links {
+    grid-column: 3;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a:nth-child(4) {
+    color: #00ff66;
+}
+
+main {
+    padding-top: 9rem;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding-bottom: 5rem;
+}
+
+.term-select {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1120px;
+    margin: 0 auto 2rem;
+    padding: 0; 
+    font-size: 1.3rem;
+}
+.term-select span {
+    margin: 0 auto;
+    font-size: 22px;
+}
+
+.term-select a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.interview-section {
+    width: 1120px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    box-sizing: border-box;
+}
+.interview-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.interview-box {
+    width: 100%;
+    height: 138px;
+    display: grid;
+    grid-template-columns: 70px 1fr auto;
+    background-color: #333333;
+    padding: 16px;
+    gap: 16px;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 10px;
+    min-height: 100px;
+}
+.interview-box:hover {
+    transform: translateY(-2px);
+}
+.interview-box::after {
+    content: '≡';
+    position: absolute;
+    right: 12px;
+    top: 15%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: #666;
+    cursor: pointer;
+}
+
+.profile-img-wrapper {
+    grid-column: 1;
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.profile-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.3rem;
+}
+
+.profile-name-tag {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.profile-name-tag h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.profile-intro {
+    margin: 0;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: bold;
+}
+
+.tag {
+    font-size: 0.75rem;
+    padding: 0.2em 0.6em;
+    border-radius: 4px;
+    font-weight: bold;
+    color: white;
+}
+
+.tag.major {
+    background-color: #2188b6;
+}
+
+.tag.non-major {
+    background-color: #c54422; 
+}
+
+.options {
+    grid-column: 3;
+    align-self: start;
+    margin-top: 5px;
+}
+
+.options img {
+    width: 20px;
+    height: 20px;
+    opacity: 0.7;
+}
+
+@media screen and (max-width: 1120px) {
+    header,
+    nav,
+    main,
+    .term-select,
+    .interview-section,
+    .footer-content-wrapper {
+        width: 100%;
+        padding: 0 2rem;
+        box-sizing: border-box;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .interview-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .interview-list {
+        grid-template-columns: 1fr;
+    }
+    .interview-box {
+        grid-template-columns: 60px 1fr auto;
+        gap: 0.8rem;
+    }
+    .profile-img-wrapper {
+        width: 60px;
+        height: 60px;
+    }
+    .profile-name-tag h3 {
+        font-size: 1.1rem;
+    }
+}
+
+footer {
+    width: 100%;
+    margin-top: 5rem;
+    background-color: #1a1a1a;
+}
+
+.footer-top {
+    background-color: #222222;
+    padding: 3rem 0;
+    border-bottom: 1px solid #444;
+}
+
+.footer-content-wrapper {
+    width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.footer-left-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.footer-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.footer-title .arrow {
+    font-size: 1.3rem;
+    margin-left: 0.5rem;
+    color: #666;
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.social-icon-box {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-icon-box img {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.social-icon-box:hover img {
+    transform: scale(1.1);
+}
+
+.mail-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mail-info a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s ease-in-out;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 3.5rem; 
+}
+
+.footer-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    position: relative;
+    padding-right: 1rem;
+}
+
+.footer-nav a:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 1em;
+    background-color: #444;
+}
+
+.footer-nav a:hover {
+    color: white;
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    background-color: #1a1a1a;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.8rem;
+    color: #666;
+}
