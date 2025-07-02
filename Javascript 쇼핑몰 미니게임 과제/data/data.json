@@ -52,8 +52,8 @@
             "type": "skirt",
             "gender": "female",
             "size": "small",
-            "color": "yellow",
-            "image": "./img/yellow_s.png"
+            "color": "pink",
+            "image": "./img/pink_s.png"
         },
         {
             "type": "pants",
