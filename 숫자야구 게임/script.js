@@ -2,8 +2,9 @@ const number1 = document.getElementById('number1');
 const number2 = document.getElementById('number2');
 const number3 = document.getElementById('number3');
 const attemptsSpan = document.getElementById('attempts');
-
-
+const resultsDiv = document.getElementById('results');
+const submitbtn = document.querySelector('.submit-button');
+const gameResultImg = document.getElementById('game-result-img');
 let answer = [];
 let attempts = 9;
 function RandomNumbers() {
@@ -43,14 +44,12 @@ function check_numbers() {
         }
     }
 
-    const resultsDiv = document.getElementById('results');
-    const submitbtn = document.querySelector('.submit-button');
     attempts--;
     attemptsSpan.textContent = attempts;
-    const gameResultImg = document.getElementById('game-result-img');
+
     let result = '';
     if (strikes === 3) { //3스트라이크하면 승리
-        result = '🎉 3S! 승리! 🎉';
+        result = '승리!';
         gameResultImg.src = 'success.png';
         submitbtn.disabled = true; //확인하기 버튼 비활성화
     } else if (strikes === 0 && balls === 0) {
@@ -97,6 +96,18 @@ number3.addEventListener('input', () => {
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && !submitbtn.disabled) {
         check_numbers();
+    }
+});
+//백스페이스 키로 지움
+number2.addEventListener('keydown', (event) => {
+    if (event.key === 'Backspace' && number2.value.length === 0) {
+        number1.focus(); // number2가 비어있고 백스페이스 누르면 number1로 이동
+    }
+});
+
+number3.addEventListener('keydown', (event) => {
+    if (event.key === 'Backspace' && number3.value.length === 0) {
+        number2.focus(); // number3이 비어있고 백스페이스 누르면 number2로 이동
     }
 });
 
