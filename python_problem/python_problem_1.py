@@ -66,6 +66,13 @@ while True:
         print(f"{현재플레이어} : {num}")
         if num >= 31:
             break
+#7단계        
     if num >= 31:
+        if turn == 0:
+            winner="playerB"
+        else:
+            winner="playerA"
+
+        print(f"{winner} win!")
         break
     turn = 1-turn
