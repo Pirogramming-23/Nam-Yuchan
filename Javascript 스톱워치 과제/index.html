@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>피로그래밍 스톱워치</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="stopwatch-container">
+        <h1>⏱️피로그래밍 스톱워치</h1>
+        <div class="stopwatch">
+            <div class="display">
+                <span id="seconds">00</span>:<span id="milliseconds">00</span>
+            </div>
+            <div class="controls">
+                <button id="startBtn">start</button>
+                <button id="pauseBtn">stop</button>
+                <button id="resetBtn">reset</button>
+            </div>
+        </div>
+        <div class="records">
+            <div class="record-controls">
+                <button id="selectAllBtn"></button>
+                <h2>구간 기록</h2>
+                <button id="deleteSelectedBtn"><img src="./trashcan.png"></button>
+            </div>
+            <div class="record-container">
+            <ul id="recordList">
+            </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
