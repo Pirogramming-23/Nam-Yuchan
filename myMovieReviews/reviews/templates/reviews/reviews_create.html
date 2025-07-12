@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리뷰 작성</title>
+    <style>
+        body { margin: 0; padding: 0; background-color: white; }
+        .container { max-width: 1000px; margin: 20px auto; padding: 20px; background-color: rgb(236, 236, 236); border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        header { background-color: white; color: black; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 0 0 black; }
+        header h1 { margin: 0; font-size: 24px; }
+        header a { color: black; text-decoration: none; }
+        
+        nav { margin-top: 10px; }
+        nav a { margin-left: 20px; color: black; text-decoration: none; }
+        .button {
+            display: inline-block;
+            padding: 8px 15px;
+            color: black;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .button:hover { opacity: 0.9; }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group textarea,
+        .form-group select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .form-actions {
+            margin-top: 20px;
+            text-align: right;
+        }
+        .form-actions .button {
+            margin-left: 10px;
+        }
+        .errorlist {
+            color: red;
+            font-size: 0.9em;
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 5px;
+        }
+        .errorlist li {
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'reviews:review_list' %}">My <span style="color: red;">Movie</span> reviews</a></h1>
+        <nav>
+            <a href="{% url 'reviews:review_create' %}" class="button">Add a New review</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h1 style="justify-self: center;"><span style="color: red;">Movie</span> review 🍿</h1>
+        <hr>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                        <small style="color: #6c757d;">{{ field.help_text }}</small>    
+                    {{ field.errors }}
+                </div>
+            {% endfor %}
+            <div class="form-actions">
+                <button type="submit" class="button" style="background-color: white;">Save</button>
+
+            </div>
+        </form>
+    </div>
+</body>
+</html>
