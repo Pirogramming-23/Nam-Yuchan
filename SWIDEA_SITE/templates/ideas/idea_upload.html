@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="content-box">
+        <h2 style="justify-self: center;">Idea Register</h2>
+        <p style="justify-self: center;">아이디어 등록 페이지 입니다. 당신의 아이디어를 잊지 말고 기록하세요!</p>
+        
+        <form action="{% url 'idea_upload' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <button type="submit" style="justify-self: center;">SUBMIT</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="content-box">
+        <h2 style="justify-self: center;">Devtool Detail Update</h2>
+        <p style="justify-self: center;">개발툴 세부내용 수정 페이지 입니다. 개발툴에 대해 수정사항이 있으면 고쳐보아요.</p>
+        
+        <form action="{% url 'devtool_update' pk=devtool.pk %}" method="post">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <button type="submit" style="justify-self: center;">SUBMIT</button>
+        </form>
+    </div>
+{% endblock %}

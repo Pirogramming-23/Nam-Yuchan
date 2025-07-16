@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="content-box">
+        <h2 style="justify-self: center;">Idea Detail Update</h2>
+        <p style="justify-self: center;">아이디어 세부내용 수정 페이지 입니다. 아이디어를 구체화 하거나 내용을 변경해 보아요.</p>
+        
+        <form action="{% url 'idea_update' pk=idea.pk %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <button type="submit" style="justify-self: center;">SUBMIT</button>
+        </form>
+    </div>
+{% endblock %}
