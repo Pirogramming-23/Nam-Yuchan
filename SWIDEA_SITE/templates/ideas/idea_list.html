@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="content-box">
+    <h2 style="justify-self: center;">Idea List</h2>
+    <p style="justify-self: center;">나의 아이디어를 잊지 말고 기록해보세요</p>
+
+    <div class="sort-options" style="justify-self: end;">
+
+        <select id="sort-select" onchange="location = this.value;">
+            <option value="{% url 'idea_list' %}?sort=created_date" {% if sort_by == 'created_date' %}selected{% endif %}>
+                최신순</option>
+            <option value="{% url 'idea_list' %}?sort=starred" {% if sort_by == 'starred' %}selected{% endif %}>찜하기순
+            </option>
+            <option value="{% url 'idea_list' %}?sort=title" {% if sort_by == 'title' %}selected{% endif %}>이름순</option>
+            <option value="{% url 'idea_list' %}?sort=interest" {% if sort_by == 'interest' %}selected{% endif %}>관심도순
+            </option>
+        </select>
+    </div>
+
+    <div class="idea-list-container">
+        {% for idea in page_obj %}
+        <div class="idea-card">
+            <span class="star-icon" data-pk="{{ idea.pk }}" style="cursor: pointer; position: absolute; right: 10px; display: flex; justify-content: flex-end; color: gray;">
+                {% if idea.ideastar_set.count > 0 %}⭐{% else %}☆{% endif %}
+            </span>
+
+
+
+            {% if idea.image %}
+            <img src="{{ idea.image.url }}" alt="{{ idea.title }}">
+            {% endif %}
+            <h3><a href="{% url 'idea_detail' pk=idea.pk %}">{{ idea.title }}</a></h3>
+            <hr>
+            <p>예상 개발 툴: {{ idea.devtool.name }}</p>
+
+            <div class="interest-control">
+                <span>아이디어 관심도: </span>
+                <button class="interest-btn" data-pk="{{ idea.pk }}" data-action="decrement">-</button>
+                <span class="interest-count-{{ idea.pk }}">{{ idea.interest }}</span>
+                <button class="interest-btn" data-pk="{{ idea.pk }}" data-action="increment">+</button>
+            </div>
+        </div>
+        {% empty %}
+        <p>등록된 아이디어가 없습니다.</p>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+        <a href="?page=1&sort={{ sort_by }}">first</a>
+        <span>
+            {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+        </span>
+        <a href="?page={{ page_obj.previous_page_number }}&sort={{ sort_by }}">previous</a>
+        {% endif %}
+
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.paginator.num_pages }}&sort={{ sort_by }}">last</a>
+
+        <span>
+            {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+        </span>
+        <a href="?page={{ page_obj.next_page_number }}&sort={{ sort_by }}">next </a>
+        
+        {% endif %}
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+    $('.interest-btn').click(function () {
+        let idea_pk = $(this).data('pk');
+        let action = $(this).data('action');
+
+        $.ajax({
+            url: '{% url "update_interest" %}',
+            type: 'POST',
+            data: {
+                'pk': idea_pk,
+                'action': action,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            dataType: 'json',
+            success: function (response) {
+                $(`.interest-count-${idea_pk}`).text(response.interest);
+            }
+        });
+    });
+
+
+    $('.star-icon').click(function () {
+        let starIcon = $(this);
+        let idea_pk = starIcon.data('pk');
+        let starCountSpan = $(`.star-count-${idea_pk}`); 
+
+
+        let currentStar = starIcon.text().trim();
+
+        if (currentStar === '⭐') {
+            // 현재 노란색 별이면투명 별로 바꾸고 찜 개수 1 감소 클라이언트에서만
+            starIcon.text('☆');
+            let currentCount = parseInt(starCountSpan.text());
+            starCountSpan.text(currentCount - 1); // 화면에 보이는 숫자만 줄임
+        } else {
+            // 현재 투명 별이면 노란색 별로 바꾸고 찜 개수 1 증가
+            starIcon.text('⭐');
+            let currentCount = parseInt(starCountSpan.text());
+            starCountSpan.text(currentCount + 1); // 화면에 보이는 숫자만 늘림
+        }
+
+        $.ajax({
+            url: '{% url "star_idea" %}', // 찜 개수만 서버에 업데이트 별 모양과는 별개
+            type: 'POST',
+            data: {
+                'pk': idea_pk,
+
+                'action': (currentStar === '⭐' ? 'decrement' : 'increment'), 
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            dataType: 'json',
+            success: function (response) {
+
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX Error: ", status, error);
+                alert("찜하기 처리 중 오류가 발생했습니다. 새로고침하면 원래대로 돌아갑니다.");
+            }
+        });
+    });
+</script>
+{% endblock %}

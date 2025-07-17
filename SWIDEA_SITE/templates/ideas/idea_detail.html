@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="content-box">
+    <h2 style="justify-self: center;">Idea Detail</h2>
+    <p style="justify-self: center;">아이디어 세부내용 페이지 입니다. 당신이 구현하려 한 아이디어들을 자세히 살펴보세요.</p>
+
+    <div class="detail-container">
+
+        {% if idea.image %}
+        <img src="{{ idea.image.url }}" alt="{{ idea.title }}" style="max-width: 100%;">
+        {% endif %}
+
+        <div>
+            <h3>{{ idea.title }}   
+                <span>
+                    {% if is_starred %}
+                    ⭐
+                    {% else %}
+                    ☆
+                    {% endif %}
+                </span>
+            </h3>
+            <p><strong>아이디어 관심도:</strong> {{ idea.interest }}</p>
+            <p><strong>예상 개발 툴:</strong> <a href="{% url 'devtool_detail' pk=idea.devtool.pk %}" style="color: lightgray;">{{ idea.devtool.name }}</a></p>
+            <p><strong>아이디어 설명:</strong> {{ idea.content }}</p>
+        </div>
+
+    </div>
+
+    <div class="button-group">
+        <form action="{% url 'idea_delete' pk=idea.pk %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" onclick="return confirm('정말로 삭제하시겠습니까?');">삭제</button>
+        </form>
+        <a href="{% url 'idea_list' %}">
+            <button>목록</button>
+        </a>
+        <a href="{% url 'idea_update' pk=idea.pk %}">
+            <button>수정</button>
+        </a>
+    </div>
+</div>
+{% endblock %}

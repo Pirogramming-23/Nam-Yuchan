@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="content-box">
+        <h2 style="justify-self: center;">DevTool List</h2>
+        <p style="justify-self: center;">개발툴 목록 페이지 입니다. 자신이 사용가능한 개발툴의 목록을 확인해 보세요.</p>
+
+        
+        <div class="devtool-list-container">
+            <table>
+                <tbody>
+                    {% for devtool in devtools %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'devtool_detail' pk=devtool.pk %}" style="color: black;">{{ devtool.name }}</a>
+                        </td>
+                        <td>{{ devtool.kind }}</td>
+                        <td style="color: black;">{{ devtool.content|truncatechars:30 }}</td>
+                    </tr>
+                    {% empty %}
+                        <tr><td colspan="3">등록된 개발툴이 없습니다.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
