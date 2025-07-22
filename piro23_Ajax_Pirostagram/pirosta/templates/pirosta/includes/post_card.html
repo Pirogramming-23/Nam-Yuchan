@@ -1,0 +1,37 @@
+{% load static %}
+<div class="post-card" data-post-id="{{ post.id }}">
+    <div class="post-header">
+        <strong>{{ post.author_username }}</strong>
+
+    </div>
+    <div class="post-image">
+        <img src="{{ post.image.url }}" alt="{{ post.content }}">
+    </div>
+    <div class="post-actions">
+        <button class="like-button" data-post-id="{{ post.id }}">
+            <img src="{% static 'images/heart.png' %}" class="icon" style="width: 24px; height: 24px;"><span class="likes-count">{{ post.total_likes }}</span>
+        </button>
+        <span class="comments-info"><img src="{% static 'images/chat.png' %}" class="icon" style="width: 26px; height: 26px;">{{ post.total_comments }}</span>
+        <span class="send-chat"><img src="{% static 'images/plane.png' %}" class="icon" style="width: 24px; height: 24px;"></span>
+    </div>
+    <span class="likes-count" style="margin-left: 20px;">좋아요 {{ post.total_likes }}개</span>
+    <div class="post-content">
+        <p>{{ post.content }}</p>
+    </div>
+    <div class="comments-section" data-post-id="{{ post.id }}">
+        <ul class="comment-list">
+            {% for comment in post.comments.all %}
+                <li data-comment-id="{{ comment.id }}">
+                    <strong>{{ comment.author_username }}</strong>: {{ comment.text }}
+                    <span class="comment-date">{{ comment.created_at|date:"Y.m.d H:i" }}</span>
+                    <button class="delete-comment-button" data-comment-id="{{ comment.id }}">❌</button>
+                </li>
+            {% endfor %}
+        </ul>
+        <form class="comment-form" data-post-id="{{ post.id }}">
+            {% csrf_token %}
+            <input type="text" name="comment_text" placeholder="댓글 달기..." required>
+            <button type="submit">게시</button>
+        </form>
+    </div>
+</div>

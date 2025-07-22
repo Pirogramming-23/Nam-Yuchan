@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pirostagram</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>   
+        <a href="{% url 'pirosta:post_create' %}" style="text-decoration: none; font-size: 300%;">+</a>
+        <h1><a href="{% url 'pirosta:index' %}" style="margin: 0 auto;">Pirostagram</a></h1>
+        <img src="{% static 'images/heart.png' %}" class="icon" style="width: 30px; height: 30px;">
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <script src="{% static 'js/pirosta.js' %}"></script>
+</body>
+</html>

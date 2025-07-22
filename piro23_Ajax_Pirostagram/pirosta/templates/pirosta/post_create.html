@@ -1,0 +1,24 @@
+{% extends 'pirosta/base.html' %}
+
+{% block content %}
+    <h2>새 게시글 작성</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <label for="author_username">인스타 아이디:</label>
+            <input type="text" id="author_username" name="author_username" required>
+        </div>
+        <div>
+            <label for="content">게시글 내용:</label>
+            <textarea id="content" name="content" rows="5" required></textarea>
+        </div>
+        <div>
+            <label for="image">사진:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+        </div>
+        <button type="submit">게시</button>
+        {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
+        {% endif %}
+    </form>
+{% endblock %}
